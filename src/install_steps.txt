@@ -1,0 +1,15 @@
+ng new angular-ngrx
+
+ng g c component/associatelisting
+ng g c component/associatelisting
+ng g c component/addassociate
+ng g s service/associate
+
+Packages:
+ng add @angular/material
+ng add @ngrx/store@latest
+ng add @ngrx/effects@latest
+ng add @ngrx/router-store@latest
+ng add @ngrx/store-devtools@latest
+
+json-server --watch ./src/data/db.json
