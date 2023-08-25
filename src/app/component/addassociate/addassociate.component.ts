@@ -4,7 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { addassociate, updateassociate } from 'src/app/store/associate/associate.action';
 import { getassociate } from 'src/app/store/associate/associate.selector';
-import { Associate } from 'src/app/store/model/associate.model';
+import { Associate } from 'src/app/store/associate/associate.model';
+import { loadspinner } from 'src/app/store/common/app.action';
 
 @Component({
   selector: 'app-addassociate',
@@ -23,7 +24,8 @@ export class AddassociateComponent implements OnInit {
   ngOnInit(): void {
     this.dialogData = this.data;
     this.title = this.dialogData.title;
-
+    this.store.dispatch(loadspinner({isLoaded: true}));
+    
     this.store.select(getassociate).subscribe(res => {
       this.associateForm.setValue({
         id: res.id, name: res.name, email: res.email, phone: res.phone,
@@ -60,6 +62,7 @@ export class AddassociateComponent implements OnInit {
         type: this.associateForm.value.type as string,
         status: this.associateForm.value.status as boolean
       }
+      this.store.dispatch(loadspinner({ isLoaded: true }));
       if (_obj.id === 0) {
         this.store.dispatch(addassociate({ data: _obj }))
       } else {

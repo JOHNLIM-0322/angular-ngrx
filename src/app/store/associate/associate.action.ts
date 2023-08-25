@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Associate } from "../model/associate.model";
+import { Associate } from "./associate.model";
 
 
 // LOAD

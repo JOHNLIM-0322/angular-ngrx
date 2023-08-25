@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AssociateService } from "src/app/service/associate.service";
 import { addassociate, addassociateFail, addassociateSuccess, deleteassociate, deleteassociateSuccess, getassociate, getassociateSuccess, loadassociate, loadassociateFail, loadassociateSuccess, updateassociate, updateassociateSuccess } from "./associate.action";
 import { catchError, exhaustMap, of, map, switchMap } from "rxjs";
-import { showalert } from "../common/app.action";
+import { loadspinner, showalert } from "../common/app.action";
 
 @Injectable()
 export class AssociateEffect {
@@ -16,10 +16,13 @@ export class AssociateEffect {
             ofType(loadassociate),
             exhaustMap((action) => {
                 return this.service.Get().pipe(
-                    map((data) => {
-                        return loadassociateSuccess({ list: data })
+                    switchMap((data) => {
+                        return of(
+                            loadassociateSuccess({ list: data }),
+                            loadspinner({ isLoaded: false })
+                        )
                     }),
-                    catchError((_error) => of(loadassociateFail({ errorMessage: _error.message })))
+                    catchError((_error) => of(loadassociateFail({ errorMessage: _error.message }), loadspinner({ isLoaded: false })))
                 )
             })
         )
@@ -32,13 +35,13 @@ export class AssociateEffect {
             switchMap((action) => {
                 return this.service.Create(action.data).pipe(
                     switchMap((data) => {
-                        console.log('addassociate, data: ' + data)
-                        console.log('addassociate, action.data: ' + action.data)
-                        return of(addassociateSuccess({ data: action.data }),
+                        return of(
+                            addassociateSuccess({ data: action.data }),
+                            loadspinner({ isLoaded: false }),
                             showalert({ message: 'Created Sucessfully.', result: 'pass' })
                         )
                     }),
-                    catchError((_error) => of(showalert({ message: 'failed to create associate: ' + _error.message, result: 'fail' })))
+                    catchError((_error) => of(showalert({ message: 'failed to create associate: ' + _error.message, result: 'fail' }), loadspinner({ isLoaded: false })))
                 )
             })
         )
@@ -50,10 +53,13 @@ export class AssociateEffect {
             ofType(getassociate),
             exhaustMap((action) => {
                 return this.service.GetByCode(action.id).pipe(
-                    map((data) => {
-                        return getassociateSuccess({ associate: data })
+                    switchMap((data) => {
+                        return of(
+                            getassociateSuccess({ associate: data }),
+                            loadspinner({ isLoaded: false })
+                        )
                     }),
-                    catchError((_error) => of(showalert({ message: 'failed to fetch associate: ' + _error.message, result: 'fail' })))
+                    catchError((_error) => of(showalert({ message: 'failed to fetch associate: ' + _error.message, result: 'fail' }), loadspinner({ isLoaded: false })))
                 )
             })
         )
@@ -66,11 +72,13 @@ export class AssociateEffect {
             switchMap((action) => {
                 return this.service.Update(action.data).pipe(
                     switchMap((data) => {
-                        return of(updateassociateSuccess({ data: action.data }),
+                        return of(
+                            updateassociateSuccess({ data: action.data }),
+                            loadspinner({ isLoaded: false }),
                             showalert({ message: 'Updated Sucessfully.', result: 'pass' })
                         )
                     }),
-                    catchError((_error) => of(showalert({ message: 'failed to update associate: ' + _error.message, result: 'fail' })))
+                    catchError((_error) => of(showalert({ message: 'failed to update associate: ' + _error.message, result: 'fail' }), loadspinner({ isLoaded: false })))
                 )
             })
         )
@@ -83,11 +91,13 @@ export class AssociateEffect {
             switchMap((action) => {
                 return this.service.Delete(action.id).pipe(
                     switchMap((data) => {
-                        return of(deleteassociateSuccess({ id: action.id }),
+                        return of(
+                            deleteassociateSuccess({ id: action.id }),
+                            loadspinner({ isLoaded: false }),
                             showalert({ message: 'Deleted Sucessfully.', result: 'pass' })
                         )
                     }),
-                    catchError((_error) => of(showalert({ message: 'failed to delete associate: ' + _error.message, result: 'fail' })))
+                    catchError((_error) => of(showalert({ message: 'failed to delete associate: ' + _error.message, result: 'fail' }), loadspinner({ isLoaded: false })))
                 )
             })
         )

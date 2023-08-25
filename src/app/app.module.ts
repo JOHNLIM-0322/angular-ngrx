@@ -17,13 +17,16 @@ import { AssociateReducer } from './store/associate/associate.reducer';
 import { AssociateEffect } from './store/associate/associate.effect';
 import { AppEffect } from './store/common/app.effect';
 import { ConfirmComponent } from './component/confirm/confirm.component';
+import { SpinnerComponent } from './component/spinner/spinner.component';
+import { reducers } from './store/common/reducers';
 
 @NgModule({
   declarations: [
     AppComponent,
     AssociatelistingComponent,
     AddassociateComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { ConfirmComponent } from './component/confirm/confirm.component';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ associate: AssociateReducer }, {}),
+    StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([AssociateEffect, AppEffect]),
     //StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })

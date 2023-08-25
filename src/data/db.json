@@ -1,22 +1,22 @@
 {
   "associate": [
     {
-      "id": 2,
-      "name": "testuser2",
-      "email": "testuser2@hotmail.com",
-      "phone": "",
-      "associategroup": "level1",
-      "address": "",
-      "type": "CUSTOMER",
-      "status": true
-    },
-    {
       "id": 3,
       "name": "testuser1",
       "email": "testuser1@hotmail.com",
       "phone": "12345678",
       "associategroup": "level1",
-      "address": "",
+      "address": "add 1\nadd 2\nadd 3",
+      "type": "CUSTOMER",
+      "status": true
+    },
+    {
+      "id": 4,
+      "name": "testuser3",
+      "email": "testuser3@hotmail.com",
+      "phone": "123456789",
+      "associategroup": "level1",
+      "address": "add1",
       "type": "CUSTOMER",
       "status": true
     }

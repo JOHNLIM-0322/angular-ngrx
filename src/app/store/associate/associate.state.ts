@@ -1,4 +1,4 @@
-import { AssociateModel } from "../model/associate.model";
+import { AssociateModel } from "./associate.model";
 
 export const AssociateState: AssociateModel= {
     list: [],
@@ -12,6 +12,6 @@ export const AssociateState: AssociateModel= {
         associategroup: "level1",
         status: true
     },
-    errorMessage: ''
-
+    errorMessage: '',
+   // isLoaded: false
 }

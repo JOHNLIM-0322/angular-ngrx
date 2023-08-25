@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { AssociateModel } from "../model/associate.model";
+import { AssociateModel } from "./associate.model";
 
 
 const getassociatestate = createFeatureSelector<AssociateModel>('associate');

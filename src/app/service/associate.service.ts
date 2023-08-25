@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Associate } from '../store/model/associate.model';
+import { Associate } from '../store/associate/associate.model';
 
 @Injectable({
   providedIn: 'root'

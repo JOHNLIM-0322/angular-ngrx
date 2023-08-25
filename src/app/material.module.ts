@@ -12,7 +12,8 @@ import { MatTableModule } from "@angular/material/table"
 import { MatPaginatorModule } from "@angular/material/paginator"
 import { MatSortModule } from "@angular/material/sort"
 import { MatSnackBarModule } from "@angular/material/snack-bar"
-
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
+import {MatIconModule} from "@angular/material/icon"
 
 @NgModule({
     exports: [
@@ -27,7 +28,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar"
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatIconModule
     ]
 })
 export class MaterialModule {

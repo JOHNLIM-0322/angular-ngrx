@@ -12,5 +12,6 @@ export interface Associate {
 export interface AssociateModel {
     list: Associate[],
     associate: Associate,
-    errorMessage: string
+    errorMessage: string,
+//    isLoaded: boolean
 }
