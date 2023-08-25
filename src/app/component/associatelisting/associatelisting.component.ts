@@ -34,14 +34,13 @@ export class AssociatelistingComponent implements OnInit {
     // 3. and it run the servie of this.service.Get()
     // 4. reducer side -> sending the data (no matter success or fail) to the 'store'
 
-    setTimeout(() => {
-      this.store.dispatch(loadassociate());
-      //this.store.dispatch(loadspinner({ isLoaded: false }));
+    // setTimeout(() => {
+    //   this.store.dispatch(loadassociate());
+    //   //this.store.dispatch(loadspinner({ isLoaded: false }));
       
-    },5000);
+    // },5000);
 
-    // this.store.dispatch(loadassociate());
-    // this.store.dispatch(loadspinner({ isLoaded: false }));
+    this.store.dispatch(loadassociate());
 
     // get data from the 'store' using "selector"
     this.store.select(getassociatelist).subscribe(item => {
@@ -58,6 +57,7 @@ export class AssociatelistingComponent implements OnInit {
   }
 
   onEdit(code: number) {
+    this.store.dispatch(loadspinner({ isLoaded: true }));
     this.openDialog(code, 'Edit Associate');
     this.store.dispatch(getassociate({ id: code }));
   }

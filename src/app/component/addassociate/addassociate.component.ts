@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -18,14 +18,13 @@ export class AddassociateComponent implements OnInit {
   isEdit = false;
   dialogData: any;
   constructor(private formBuilder: FormBuilder, private ref: MatDialogRef<AddassociateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private store:Store) {
+    @Inject(MAT_DIALOG_DATA) public data: any, private store: Store) {
   }
 
   ngOnInit(): void {
     this.dialogData = this.data;
     this.title = this.dialogData.title;
-    this.store.dispatch(loadspinner({isLoaded: true}));
-    
+
     this.store.select(getassociate).subscribe(res => {
       this.associateForm.setValue({
         id: res.id, name: res.name, email: res.email, phone: res.phone,
